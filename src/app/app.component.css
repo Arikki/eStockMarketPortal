@@ -1,0 +1,25 @@
+.stock{
+    padding: 10rem 40rem;
+}
+
+.search{
+    margin: 2rem;
+}
+
+.thead{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+
+}
+
+.header{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    
+}
+
+.stats{
+    padding: 0rem 2rem;
+}
