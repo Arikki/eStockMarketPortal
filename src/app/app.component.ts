@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   minPrice = 0;
   maxPrice = 0;
   avgPrice = 0;
+  noStockFound = false;
   ngOnInit(): void {
     console.log("Inside init")
    this.appService.getAll().subscribe(
@@ -43,12 +44,17 @@ export class AppComponent implements OnInit{
       {next: (respData) => {
        
         console.log(respData);
+
         this.stocks = respData;
+        if (this.stocks.length == 0){
+            this.noStockFound = true;
+        } else{
        this.minPrice = Math.min.apply(null,this.stocks.map(stock => stock.stock_price));
        this.maxPrice = Math.max.apply(null,this.stocks.map(stock => stock.stock_price));
        console.log((this.stocks.map(stock => stock.stock_price).reduce((a,b) => a + b, 0))/this.stocks.length);
        this.avgPrice = ((this.stocks.map(stock => stock.stock_price).reduce((a,b) => a + b, 0))/this.stocks.length);
-        this.isSubmitted = true;
+       this.isSubmitted = true;
+        }
       },
          complete: () => console.log()}
       

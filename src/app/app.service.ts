@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Company } from "./company.model";
 import {catchError} from 'rxjs/operators';
@@ -12,10 +12,9 @@ import { Stock } from "./stock.model";
 export class AppService{
 
     constructor(private http: HttpClient) {}
-
     getAll(){
         console.log("inside svc");
-        const url = "http://localhost:8081/api/v1.0/market/company/getall";
+        const url = "http://localhost:8080/api/v1.0/market/company/getall";
         return  this.http.get<Company[]>(url).pipe(
             catchError((errorResp) => {
               let errorMsg = "An error occured!";
@@ -39,7 +38,7 @@ export class AppService{
 
     getStockDetails(form:NgForm){   
 
-        const url = "http://localhost:8082/api/v1.0/market/stock/get/" + form.value.companyCode+"/"+form.value.startDate+"/"+form.value.endDate;
+        const url = "http://localhost:8080/api/v1.0/market/stock/get/" + form.value.companyCode+"/"+form.value.startDate+"/"+form.value.endDate;
         return this.http.get<Stock[]>(url).pipe(
             catchError((errorResp) => {
               let errorMsg = "An error occured!";

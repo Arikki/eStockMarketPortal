@@ -11,7 +11,7 @@
             [(ngModel)]="selectedCmpnyCode"
             (change)="getCompanyName()"
             style="width: 100%"
-          >
+          required>
             <option *ngFor="let item of companies" value="{{ item._id }}">
               {{ item._id }}
             </option>
@@ -44,7 +44,7 @@
             name="startDate"
             placeholder="Start Date"
             ngModel
-          />
+          required/>
         </div>
         <div class="form-group col-md-3">
           <label for="endDate">End Date:</label>
@@ -55,21 +55,25 @@
             name="endDate"
             placeholder="End Date"
             ngModel
-          />
+          required/>
         </div>
       </div>
-      <button class="btn btn-primary search" type="submit">Search</button>
+      <button class="btn btn-primary search" type="submit" [disabled] = "!mainForm.valid">Search</button>
     </div>
   </div>
 </form>
+
+<div class="alert alert-warning" role="alert"  style="margin-right: 90rem;margin-left: 15rem;" *ngIf = noStockFound>
+  No Stocks found for given date range. Please select another date range
+</div>
 
 <div class="stock" *ngIf="isSubmitted">
   <table class="table-bordered table-striped table-condensed table">
     <thead>
       <tr>
-        <th colspan="1">Stock Price</th>
-        <th colspan="1">Date</th>
-        <th colspan="1">Time</th>
+        <th colspan="1" class="header">Stock Price</th>
+        <th colspan="1" class="header">Date</th>
+        <th colspan="1" class="header">Time</th>
       </tr>
     </thead>
     <tbody>
